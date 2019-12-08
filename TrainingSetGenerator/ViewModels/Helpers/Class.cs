@@ -13,7 +13,7 @@ namespace TrainingSetGenerator.ViewModels.Helpers
         public static string GetPropertyName<TP>(Expression<Func<TP>> getProperty)
         {
             var member = getProperty.Body as MemberExpression;
-            Debug.Assert(member != null, string.Format(RefersToMethod,  getProperty));
+            Debug.Assert(member != null, string.Format(RefersToMethod, getProperty));
 
             var info = member.Member as PropertyInfo;
             Debug.Assert(info != null, string.Format(RefersToField, getProperty));
@@ -29,9 +29,8 @@ namespace TrainingSetGenerator.ViewModels.Helpers
             var info = member.Member as PropertyInfo;
             Debug.Assert(info != null, string.Format(RefersToField, getProperty));
 
-            var type = typeof(T);
-            Debug.Assert(type == info.DeclaringType && type.GetTypeInfo().IsSubclassOf(info.DeclaringType),
-                $"Expresion '{getProperty}' refers to a property that is not from type {type}.");
+            Debug.Assert(typeof(T) == info.DeclaringType,
+                $"Expresion '{getProperty}' refers to a property that is not from type.");
 
             return info.Name;
         }
